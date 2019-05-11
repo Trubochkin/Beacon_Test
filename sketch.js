@@ -12,14 +12,13 @@ const SCALE = 0.2;
 const WIDTH = 5900 * SCALE;
 const HEIGHT = 6900 * SCALE;
 
-
 let gateways = [
   {
-    id: "240ac4298198", 
+    id: "240ac4298198",
     color: "#e00000", // red
     colorCircle: "rgba(240, 0, 0, 0.15)",
-    pos: [WIDTH * 0.1, 30], 
-    data: [] 
+    pos: [WIDTH * 0.1, 30],
+    data: []
   },
   {
     id: "240ac429de7c",
@@ -36,7 +35,6 @@ let gateways = [
     data: []
   }
 ];
-
 
 function preload() {
   // preload() runs once
@@ -59,7 +57,6 @@ function preload() {
     });
 }
 
-
 /**
  * Setup program
  */
@@ -79,18 +76,15 @@ function setup() {
   noLoop();
 }
 
-
 /**
  * This will loop for ever
  */
 function draw() {
   translate(500, 100);
   background(255);
-  push();
   strokeWeight(20);
   strokeCap(PROJECT);
   stroke(122);
-  // rect(0, 0, width, height);
   beginShape();
   vertex(WIDTH * 0.05, 0);
   vertex(WIDTH, 0);
@@ -104,12 +98,22 @@ function draw() {
   vertex(WIDTH * 0.05, HEIGHT * 0.03);
   vertex(WIDTH * 0.05, 0);
   endShape();
-  pop();
 
   strokeWeight(15);
-  stroke(122);
   noFill();
   rect(WIDTH * 0.48, 0, WIDTH * 0.52, HEIGHT * 0.51);
+
+  strokeWeight(18);
+  stroke(255);
+  line(WIDTH * 0.5, HEIGHT * 0.51, WIDTH * 0.6, HEIGHT * 0.51);
+  strokeWeight(22);
+  line(WIDTH * 0.45, HEIGHT, WIDTH * 0.55, HEIGHT);
+
+  stroke(122);
+  strokeCap(ROUND);
+  strokeWeight(10);
+  line(WIDTH * 0.52, HEIGHT * 0.57, WIDTH * 0.61, HEIGHT * 0.51);
+  line(WIDTH * 0.47, HEIGHT * 1.06, WIDTH * 0.57, HEIGHT);
 
   // Draw beacons
   for (gateway of gateways) {
@@ -119,16 +123,15 @@ function draw() {
     ellipse(gateway.pos[0], gateway.pos[1], 50);
     pop();
 
-    
     push();
     // var c = color(122, 153, 22, 0.1);
     stroke(gateway.colorCircle);
     strokeWeight(1);
     noFill();
-    if(gateway.data.length > 0) {
+    if (gateway.data.length > 0) {
       gateway.data.forEach(e => {
-        ellipse(gateway.pos[0], gateway.pos[1], (e.distance * 1000) * 0.2);
-      })
+        ellipse(gateway.pos[0], gateway.pos[1], e.distance * 1000 * 0.2);
+      });
     }
   }
 
@@ -137,19 +140,14 @@ function draw() {
   textSize(42);
   textStyle(NORMAL);
   fill(0);
-  text('6.9m x 5.9m', WIDTH * 0.77, HEIGHT * 0.95);
+  text("6.9m x 5.9m", WIDTH * 0.77, HEIGHT * 0.95);
   pop();
-
 }
-
-
 
 function mousePressed() {
   preload();
 }
 
-
-
-setInterval(function () {
+setInterval(function() {
   preload();
-}, 10000)
+}, 10000);
