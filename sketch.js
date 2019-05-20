@@ -3,6 +3,8 @@
  * Trilateration math by https://gist.github.com/kdzwinel/8235348
  * Example by Djonathan Krause, 2018
  */
+let dateTimeFrom = new Date(2019, 4, 13).getTime();
+let dateTimeTo = new Date().getTime();
 
 let beacons = [];
 let b1, b2, b3;
@@ -39,16 +41,20 @@ let gateways = [
 function preload() {
   // preload() runs once
   axios
-    .get("http://176.106.1.136:9000/api/Data/list")
+    .get("http://176.106.1.136:9000/api/Data/list", {
+      params: {
+        timeFrom: dateTimeFrom,
+        timeTo: dateTimeTo
+      }
+    })
     .then(function(response) {
       // handle success
-      console.log(response);
-      gateways.map((gateway, i) => {
+      gateways.forEach((gateway, i) => {
         gateway.data = response.data.filter(element => {
           return element.iD_GW == gateways[i].id;
         });
       });
-
+      console.log(gateway.data);
       redraw();
     })
     .catch(function(error) {
@@ -74,6 +80,46 @@ function setup() {
   beacons.push(b2);
   beacons.push(b3);
   noLoop();
+
+  let configDatepicker = {
+    timepicker: true,
+    minDate: new Date(dateTimeFrom),
+    // maxDate: new Date(),
+    todayButton: new Date()
+  }
+
+  $("#datepicker_from").datepicker(configDatepicker);
+  $("#datepicker_to").datepicker(configDatepicker);
+
+  $("#datepicker_from").datepicker({
+    onSelect: function(formattedDate, date, inst) {
+      dateTimeFrom = date.getTime();
+    },
+    onHide: function(inst, animationCompleted) {
+      console.log("onHide1", this)
+      // inst.selectDates(new Date(2019, 4, 12));
+      inst.date = new Date(2019, 4, 12);
+      animationCompleted ? preload() : 0;
+    },
+    onShow: function(inst, animationCompleted) {
+      console.log("onShow1", inst)
+      inst.opts.todayButton = new Date();
+    }
+  });
+
+  $("#datepicker_to").datepicker({
+    onSelect: function(formattedDate, date, inst) {
+      dateTimeTo= date.getTime();
+    },
+    onHide: function(inst, animationCompleted) {
+      animationCompleted ? preload() : 0;
+    },
+    onShow: function(inst, animationCompleted) {
+      // console.log("onShow2", inst)
+      inst.opts.todayButton = new Date();
+    }
+  })
+    
 }
 
 /**
@@ -144,9 +190,9 @@ function draw() {
   pop();
 }
 
-function mousePressed() {
-  preload();
-}
+// function mousePressed() {
+//   preload();
+// }
 
 setInterval(function() {
   preload();

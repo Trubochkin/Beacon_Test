@@ -1,9 +1,11 @@
 <html>
   <head>
+    <meta charset="utf-8"> 
     <link href="style.css" rel="stylesheet" type="text/css">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
     <link href="air_datepicker/css/datepicker.min.css" rel="stylesheet" type="text/css">
     <script src="air_datepicker/js/datepicker.min.js"></script>
+    <!-- <script src="air_datepicker/js/i18n/datepicker.en.js"></script> -->
     <script src="axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
 	  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
@@ -12,8 +14,8 @@
   </head>
   <body>
     <div id="wrap-datepicker">
-      From:<br><input type="text" class="datepicker-here" data-position="right top" data-timepicker="true"><br>
-      To:<br><input type="text" class="datepicker-here" data-position="right top" data-timepicker="true"><br>
+      From:<br><input type="text" id="datepicker_from" class="datepicker-here" data-position="right top"><br><br>
+      To:<br><input type="text" id="datepicker_to" class="datepicker-here" data-position="right top"><br>
     </div>
     
   </body>
