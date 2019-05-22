@@ -54,7 +54,7 @@ function preload() {
           return element.iD_GW == gateways[i].id;
         });
       });
-      console.log(gateway.data);
+      console.log(response.data);
       redraw();
     })
     .catch(function(error) {
