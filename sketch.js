@@ -3,8 +3,9 @@
  * Trilateration math by https://gist.github.com/kdzwinel/8235348
  * Example by Djonathan Krause, 2018
  */
-let dateTimeFrom = new Date(2019, 4, 13).getTime();
-let dateTimeTo = new Date().getTime();
+let dateYesterday = new Date().setDate(new Date().getDate() - 1);
+let dateTimeFrom = new Date(dateYesterday).setHours(0+3,0,0);
+let dateTimeTo = new Date().setHours(24+3,0,0);
 
 let beacons = [];
 let b1, b2, b3;
@@ -118,8 +119,12 @@ function setup() {
       // console.log("onShow2", inst)
       inst.opts.todayButton = new Date();
     }
-  })
+  });
     
+  $(".p5Canvas").click(function() {
+    console.log("click");
+    preload();
+  })
 }
 
 /**
@@ -194,6 +199,6 @@ function draw() {
 //   preload();
 // }
 
-setInterval(function() {
-  preload();
-}, 10000);
+// setInterval(function() {
+//   preload();
+// }, 10000);
