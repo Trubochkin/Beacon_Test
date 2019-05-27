@@ -84,7 +84,7 @@ function setup() {
 
   let configDatepicker = {
     timepicker: true,
-    minDate: new Date(dateTimeFrom),
+    minDate: new Date(2019,4,1),
     // maxDate: new Date(),
     todayButton: new Date()
   }
@@ -99,7 +99,7 @@ function setup() {
     onHide: function(inst, animationCompleted) {
       console.log("onHide1", this)
       // inst.selectDates(new Date(2019, 4, 12));
-      inst.date = new Date(2019, 4, 12);
+      // inst.date = new Date(2019, 4, 12);
       animationCompleted ? preload() : 0;
     },
     onShow: function(inst, animationCompleted) {
