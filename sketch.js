@@ -3,7 +3,7 @@
  * Trilateration math by https://gist.github.com/kdzwinel/8235348
  * Example by Djonathan Krause, 2018
  */
-let dateYesterday = new Date().setDate(new Date().getDate() - 1);
+let dateYesterday = new Date().setDate(new Date().getDate());
 let dateTimeFrom = new Date(dateYesterday).setHours(0+3,0,0);
 let dateTimeTo = new Date().setHours(24+3,0,0);
 
@@ -199,6 +199,6 @@ function draw() {
 //   preload();
 // }
 
-// setInterval(function() {
-//   preload();
-// }, 10000);
+setInterval(function() {
+  preload();
+}, 30000);
